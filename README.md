@@ -1,52 +1,55 @@
-# SentinelForge-AI-Based-Threat-Detection-System
-# Kernel-Level Ransomware Detection System
+# SentinelForge – AI-Based Threat Detection System
 
 ## 🚀 Overview
 
-This project focuses on detecting ransomware-like behavior at a low level by monitoring abnormal file activities and system behavior. It aims to identify rapid encryption patterns and unauthorized file modifications.
+SentinelForge is a real-time threat detection and monitoring system designed to identify suspicious system activities using behavioral analysis and rule-based detection. It provides a lightweight security layer for detecting unauthorized processes and anomalies in a Linux environment.
 
 ## 🎯 Features
 
-* Detection of abnormal file operations
-* Monitoring rapid file changes (encryption patterns)
-* Real-time alerting system
-* Lightweight and efficient monitoring
+* Real-time system monitoring
+* Behavioral-based threat detection
+* Whitelisting mechanism for trusted processes
+* Logging and alerting system
+* Modular architecture for future AI integration
 
 ## 🛠️ Tech Stack
 
-* C
-* Linux Kernel Concepts
-* File System Monitoring
+* Python
+* Linux (Ubuntu/Kali)
+* System Monitoring (psutil)
 
 ## ⚙️ How It Works
 
-* Monitors file system activity for unusual patterns
-* Detects rapid file modifications or mass changes
-* Flags behavior similar to ransomware encryption
-* Logs events and triggers alerts
+* Continuously monitors running processes and system activities
+* Compares processes against a predefined whitelist
+* Detects anomalies such as unknown or suspicious processes
+* Logs all activities and triggers alerts for potential threats
 
 ## 📂 Project Structure
 
-ransomware-detection/
-│── monitor.c
-│── detector.c
+sentinelforge/
+│── main.py
+│── monitor.py
+│── detector.py
+│── whitelist.txt
 │── logs/
 
 ## ▶️ Usage
 
 ```bash
-gcc monitor.c -o monitor
-./monitor
+git clone https://github.com/yourusername/sentinelforge.git
+cd sentinelforge
+python3 main.py
 ```
 
 ## 🔮 Future Improvements
 
-* Kernel module implementation
-* Integration with real-time blocking mechanisms
-* Machine learning-based detection
+* AI/ML-based anomaly detection
+* Integration with SIEM tools (Splunk/ELK)
+* Dashboard for real-time visualization
 
 ## 📌 Use Case
 
-* Detect ransomware attacks early
-* Protect system files from unauthorized encryption
-* Security research and testing
+* Endpoint monitoring
+* Early-stage threat detection
+* Security research and experimentation
