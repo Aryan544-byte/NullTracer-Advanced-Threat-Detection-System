@@ -1,0 +1,39 @@
+# NullTracer — Python Dependencies
+# =================================
+# Install with: pip install -r requirements.txt
+
+# --- Phase 1: Attack-Chain Engine ---
+pyyaml>=6.0
+
+# --- Phase 2: Sigma Auto-Generator ---
+# pySigma core (rule parsing and base pipeline)
+pysigma>=0.11.0
+
+# pySigma backends — install all three or only what you need
+pysigma-backend-splunk>=1.2.0
+pysigma-backend-elasticsearch>=1.1.0
+pysigma-backend-microsoft365defender>=1.3.0
+
+# pySigma field-name pipeline support
+pysigma-pipeline-windows>=1.1.0
+pysigma-pipeline-sysmon>=1.3.0
+
+# --- Phase 3: Kernel Driver Relay Agent ---
+# pywin32 provides ctypes-friendly wrappers for CreateFile / DeviceIoControl
+# used by agent/nulltracer_agent.py to talk to NullTracerDrv.sys.
+# Only required on Windows; the driver itself is C (no Python dependency).
+pywin32>=306
+
+# --- Phase 4: ETW Consumer & Correlation ---
+# pywintrace provides access to Windows Event Tracing (ETW)
+pywintrace>=0.2.0
+
+# --- Phase 5: Validation Framework ---
+# CPU/memory overhead measurement
+psutil>=5.9.0
+# Tabular analysis of detection/FP results
+pandas>=2.0.0
+# Rich terminal reports and progress bars
+rich>=13.0.0
+# Automated detection accuracy test suite
+pytest>=7.0.0

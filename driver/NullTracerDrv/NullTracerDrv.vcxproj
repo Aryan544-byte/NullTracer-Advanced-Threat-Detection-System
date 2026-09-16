@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  NullTracerDrv.vcxproj — MSBuild / WDK project file
+  ====================================================
+  Windows Driver Kit (WDK) kernel-mode driver project.
+
+  Requirements:
+    - Visual Studio 2022 Build Tools (or full VS)
+    - Windows Driver Kit 10 (matching SDK version)
+    - "Spectre mitigation" libs (pszigzag-aware NTKernelLib)
+
+  Build from command line after running vcvarsall.bat + setenv.bat:
+    msbuild NullTracerDrv.vcxproj /p:Configuration=Release /p:Platform=x64
+
+  Or use build.ps1 which sets up the environment automatically.
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <!-- ======================================================================
+       Import the WDK targets first — these define the Driver configuration
+       ====================================================================== -->
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+    <Platform Condition="'$(Platform)'==''">x64</Platform>
+    <RootNamespace>NullTracerDrv</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <DriverType>WDM</DriverType>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <!-- ======================================================================
+       Per-configuration property groups
+       ====================================================================== -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Driver</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <DriverType>WDM</DriverType>
+    <EnableInf2cat>false</EnableInf2cat>
+    <SignMode>Off</SignMode>          <!-- Signing handled by setup_testsign.ps1 -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Driver</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <TargetVersion>Windows10</TargetVersion>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <DriverType>WDM</DriverType>
+    <EnableInf2cat>false</EnableInf2cat>
+    <SignMode>Off</SignMode>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="PropertySheets" />
+
+  <!-- ======================================================================
+       Compiler & Linker options
+       ====================================================================== -->
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;_AMD64_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Speed</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <!-- /GS- : No buffer security check (kernel mode) -->
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <!-- /Gz : __stdcall calling convention -->
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <!-- /INTEGRITYCHECK: required for kernel drivers on Windows 8+ -->
+      <AdditionalOptions>/INTEGRITYCHECK %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Native</SubSystem>
+      <Driver>Driver</Driver>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>DBG=1;_AMD64_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Disabled</Optimization>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/INTEGRITYCHECK %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Native</SubSystem>
+      <Driver>Driver</Driver>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <!-- ======================================================================
+       Source files
+       ====================================================================== -->
+  <ItemGroup>
+    <ClCompile Include="NullTracerDrv.c" />
+    <ClCompile Include="callbacks.c" />
+    <ClCompile Include="ringbuf.c" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClInclude Include="ioctl.h" />
+    <ClInclude Include="ringbuf.h" />
+    <ClInclude Include="callbacks.h" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DriverSign Include="NullTracerDrv.inf" />
+  </ItemGroup>
+
+  <!-- ======================================================================
+       WDK import
+       ====================================================================== -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+
+</Project>
