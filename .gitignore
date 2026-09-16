@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Visual Studio & C/C++ Driver Build Artifacts
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+x64/
+x86/
+Debug/
+Release/
+*.obj
+*.sys
+*.exe
+*.dll
+*.pdb
+*.lib
+*.ilk
+*.exp
+*.log
+*.tlog
+*.idb
+
+# NullTracer Specific Local/Scratch Files
+scratch*
+agent/alerts.jsonl
+*.vmdk
+*.ova
