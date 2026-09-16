@@ -1,8 +1,8 @@
-# SentinelForge – AI-Based Threat Detection System
+# Nulltracer– Advanced Threat Detection System
 
 ## 🚀 Overview
 
-SentinelForge is a real-time threat detection and monitoring system designed to identify suspicious system activities using behavioral analysis and rule-based detection. It provides a lightweight security layer for detecting unauthorized processes and anomalies in a Linux environment.
+Nulltracer is a real-time threat detection and monitoring system designed to identify suspicious system activities using behavioral analysis and rule-based detection. It provides a lightweight security layer for detecting unauthorized processes and anomalies in a Linux environment.
 
 ## 🎯 Features
 
@@ -27,7 +27,7 @@ SentinelForge is a real-time threat detection and monitoring system designed to 
 
 ## 📂 Project Structure
 
-sentinelforge/
+nulltracer/
 │── main.py
 │── monitor.py
 │── detector.py
@@ -37,8 +37,8 @@ sentinelforge/
 ## ▶️ Usage
 
 ```bash
-git clone https://github.com/yourusername/sentinelforge.git
-cd sentinelforge
+git clone https://github.com/yourusername/nulltracer.git
+cd nulltracer
 python3 main.py
 ```
 
