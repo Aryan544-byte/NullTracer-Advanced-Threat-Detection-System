@@ -1,0 +1,1 @@
+Image="*powershell.exe*" CommandLine="*-enc*" Image="*rundll32.exe*" Image="*wmiprvse.exe*"

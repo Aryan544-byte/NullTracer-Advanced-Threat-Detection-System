@@ -1,0 +1,6 @@
+# NullTracer auto-generated ELASTIC query
+# Chain ID: chain_001
+
+(process.executable: (*\powershell.exe) AND process.command_line: (*-enc*)) 
+AND (process.executable: (*\rundll32.exe)) 
+AND (process.executable: (*\wmiprvse.exe))

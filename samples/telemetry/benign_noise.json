@@ -1,0 +1,85 @@
+﻿[
+  {
+    "_comment": "Benign: normal cmd.exe from explorer",
+    "timestamp": 1700200000.0,
+    "event_type": "ProcessCreate",
+    "pid": 6000,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\explorer.exe",
+    "command_line": "explorer.exe",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: cmd.exe /c dir (not powershell, no -enc)",
+    "timestamp": 1700200005.0,
+    "event_type": "ProcessCreate",
+    "pid": 6100,
+    "ppid": 6000,
+    "image_path": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "cmd.exe /c dir C:\\Users",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: notepad.exe opened by user",
+    "timestamp": 1700200010.0,
+    "event_type": "ProcessCreate",
+    "pid": 6200,
+    "ppid": 6000,
+    "image_path": "C:\\Windows\\System32\\notepad.exe",
+    "command_line": "notepad.exe C:\\Users\\Public\\readme.txt",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: powershell for legitimate admin script (no -enc, no child rundll32)",
+    "timestamp": 1700200015.0,
+    "event_type": "ProcessCreate",
+    "pid": 6300,
+    "ppid": 6000,
+    "image_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -NonInteractive Get-WindowsUpdate",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: svchost launched by services.exe (typical system noise)",
+    "timestamp": 1700200020.0,
+    "event_type": "ProcessCreate",
+    "pid": 6400,
+    "ppid": 500,
+    "image_path": "C:\\Windows\\System32\\svchost.exe",
+    "command_line": "svchost.exe -k netsvcs -p",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: Windows Defender AV scan",
+    "timestamp": 1700200025.0,
+    "event_type": "ProcessCreate",
+    "pid": 6500,
+    "ppid": 700,
+    "image_path": "C:\\Program Files\\Windows Defender\\MpCmdRun.exe",
+    "command_line": "MpCmdRun.exe -Scan -ScanType 2",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: rundll32 for legitimate shell extension (no malicious parent chain)",
+    "timestamp": 1700200030.0,
+    "event_type": "ProcessCreate",
+    "pid": 6600,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "rundll32.exe shell32.dll,Control_RunDLL desk.cpl",
+    "details": {}
+  },
+  {
+    "_comment": "Benign: registry telemetry - benign run key",
+    "timestamp": 1700200035.0,
+    "event_type": "RegistrySet",
+    "pid": 6000,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\explorer.exe",
+    "command_line": null,
+    "details": {
+      "registry_key": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDrive",
+      "registry_value": "C:\\Users\\aryan\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe"
+    }
+  }
+]

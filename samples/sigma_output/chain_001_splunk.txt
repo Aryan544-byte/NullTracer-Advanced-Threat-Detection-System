@@ -1,0 +1,9 @@
+# NullTracer auto-generated SPLUNK query
+# Chain ID: chain_001
+
+index=* 
+  (Image="*\\powershell.exe" CommandLine="*-enc*") 
+  AND (Image="*\\rundll32.exe") 
+  AND (Image="*\\wmiprvse.exe") 
+| stats count by host, Image, CommandLine, ParentImage, ProcessId, ParentProcessId
+| where count > 0

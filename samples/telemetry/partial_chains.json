@@ -1,0 +1,62 @@
+﻿[
+  {
+    "_comment": "Partial chain: powershell -enc but NO rundll32 child — should NOT alert",
+    "timestamp": 1700300000.0,
+    "event_type": "ProcessCreate",
+    "pid": 7000,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\explorer.exe",
+    "command_line": "explorer.exe",
+    "details": {}
+  },
+  {
+    "_comment": "Partial: powershell -enc without chain continuation",
+    "timestamp": 1700300005.0,
+    "event_type": "ProcessCreate",
+    "pid": 7100,
+    "ppid": 7000,
+    "image_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -enc SGVsbG8gV29ybGQ=",
+    "details": {}
+  },
+  {
+    "_comment": "Partial: cmd.exe child of powershell (NOT rundll32 — chain breaks)",
+    "timestamp": 1700300010.0,
+    "event_type": "ProcessCreate",
+    "pid": 7200,
+    "ppid": 7100,
+    "image_path": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "cmd.exe /c ipconfig",
+    "details": {}
+  },
+  {
+    "_comment": "Out-of-order chain: rundll32 then powershell -enc (wrong order — should NOT alert)",
+    "timestamp": 1700300015.0,
+    "event_type": "ProcessCreate",
+    "pid": 7300,
+    "ppid": 400,
+    "image_path": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "rundll32.exe C:\\Windows\\System32\\shell32.dll,ShellExec_RunDLL",
+    "details": {}
+  },
+  {
+    "_comment": "Wrong lineage: powershell -enc from services.exe (not in our chain parent)",
+    "timestamp": 1700300020.0,
+    "event_type": "ProcessCreate",
+    "pid": 7400,
+    "ppid": 500,
+    "image_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -enc VGVzdA==",
+    "details": {}
+  },
+  {
+    "_comment": "Wrong lineage: rundll32 from services (not child of above ps — should NOT alert)",
+    "timestamp": 1700300025.0,
+    "event_type": "ProcessCreate",
+    "pid": 7500,
+    "ppid": 600,
+    "image_path": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "rundll32.exe C:\\Users\\Public\\payload.dll,DllMain",
+    "details": {}
+  }
+]

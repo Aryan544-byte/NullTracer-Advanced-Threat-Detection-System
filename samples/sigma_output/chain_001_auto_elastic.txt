@@ -1,0 +1,1 @@
+(Image:*powershell.exe* AND CommandLine:*\-enc*) AND Image:*rundll32.exe* AND Image:*wmiprvse.exe*

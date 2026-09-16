@@ -1,0 +1,1 @@
+(Image contains "powershell.exe" and CommandLine contains "-enc") and Image contains "rundll32.exe" and Image contains "wmiprvse.exe"

@@ -1,0 +1,9 @@
+# NullTracer auto-generated SENTINEL query
+# Chain ID: chain_001
+
+DeviceProcessEvents
+| where (FolderPath endswith @"\powershell.exe" and ProcessCommandLine contains "-enc")
+    or (FolderPath endswith @"\rundll32.exe")
+    or (FolderPath endswith @"\wmiprvse.exe")
+| summarize Events=count(), Processes=make_set(FolderPath) by DeviceName, InitiatingProcessId, Timestamp
+| where array_length(Processes) >= 3

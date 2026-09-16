@@ -1,0 +1,23 @@
+id: "chain_001"
+name: "LOLbin Lateral Movement (PowerShell -> RunDLL32 -> WMI)"
+description: "Detects an encoded powershell command dropping a DLL and executing it via rundll32, followed by WMI lateral movement."
+mitre_tags: 
+  - "T1059.001"
+  - "T1218.011"
+  - "T1047"
+steps:
+  - name: "Initial PowerShell Execution"
+    event_type: "ProcessCreate"
+    conditions:
+      image_path: "powershell.exe"
+      command_line: "-enc"
+      
+  - name: "RunDLL32 Payload Execution"
+    event_type: "ProcessCreate"
+    conditions:
+      image_path: "rundll32.exe"
+      
+  - name: "WMI Lateral Execution"
+    event_type: "ProcessCreate"
+    conditions:
+      image_path: "wmiprvse.exe"
